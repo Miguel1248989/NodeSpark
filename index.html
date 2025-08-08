@@ -1,97 +1,473 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NodeSpark - Innovación Tecnológica</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background-color: #1a1a1a;
-            color: #00ffcc;
-            text-align: center;
-        }
-        header {
-            padding: 20px;
-            background-color: #0d0d0d;
-        }
-        .logo {
-            width: 150px;
-            height: auto;
-        }
-        nav {
-            margin: 20px 0;
-        }
-        nav a {
-            color: #00ffcc;
-            margin: 0 15px;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        nav a:hover {
-            text-decoration: underline;
-        }
-        .section {
-            padding: 40px 20px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        h1, h2 {
-            color: #00ffcc;
-        }
-        p {
-            line-height: 1.6;
-            color: #ccc;
-        }
-        footer {
-            padding: 20px;
-            background-color: #0d0d0d;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-        }
-    </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>NodeSpark Corp.</title>
+<meta name="description" content="NodeSpark Corp. — Soluciones en blockchain, IA y sistemas de alto rendimiento."/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Orbitron:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#061014;         /* fondo profundo */
+    --panel:#0c1618;      /* paneles oscuros */
+    --muted:#9aa9a6;
+    --accent:#1db954;     /* verde brillante */
+    --glass: rgba(255,255,255,0.03);
+    --radius:16px;
+    --maxw:1200px;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background: linear-gradient(180deg, var(--bg), #071217 60%);
+    color: #eaf2ef;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    overflow-x:hidden;
+  }
+
+  /* Top nav */
+  .site{
+    max-width:var(--maxw);
+    margin: 32px auto;
+    padding: 24px;
+    position:relative;
+  }
+  header{
+    display:flex;
+    gap:20px;
+    align-items:center;
+    justify-content:space-between;
+    padding:10px 12px;
+    background:transparent;
+  }
+  .brand{
+    display:flex;
+    gap:14px;
+    align-items:center;
+  }
+  /* SVG logo wrapper */
+  .logo-wrap{
+    width:56px;height:56px;
+    display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(135deg, rgba(29,185,84,0.12), rgba(29,185,84,0.02));
+    border-radius:12px;
+    box-shadow: 0 6px 20px rgba(13,30,18,0.35), inset 0 -3px 8px rgba(0,0,0,0.4);
+  }
+  .brand h1{
+    margin:0;font-family:Orbitron, Inter, sans-serif;
+    font-size:18px;letter-spacing:0.6px;
+    color:var(--accent);
+  }
+  nav{display:flex;gap:18px;align-items:center}
+  nav a{
+    color:var(--muted); text-decoration:none; font-weight:600;
+    padding:8px 12px; border-radius:10px; transition:all .26s;
+  }
+  nav a:hover{ color:white; background:rgba(255,255,255,0.02); transform:translateY(-2px);}
+
+  /* Hero */
+  .hero{
+    margin-top:28px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+    border-radius:20px;
+    padding: clamp(28px, 6vw, 48px);
+    display:grid;
+    grid-template-columns: 1fr 420px;
+    gap:28px;
+    align-items:center;
+    position:relative;
+    overflow:hidden;
+  }
+  @media (max-width:980px){
+    .hero{grid-template-columns:1fr; padding:28px;}
+    .hero-right{order:-1}
+  }
+
+  .hero-left{
+    z-index:2;
+  }
+  .kicker{
+    display:inline-block;
+    background:linear-gradient(90deg, rgba(29,185,84,0.12), rgba(29,185,84,0.02));
+    color:var(--accent);
+    padding:8px 12px;border-radius:999px;font-weight:700;
+    font-size:13px;margin-bottom:14px;
+    box-shadow: 0 6px 18px rgba(13,30,18,0.18);
+  }
+  h2{
+    margin:0 0 18px 0;
+    font-family:Orbitron, Inter, sans-serif;
+    font-size: clamp(28px, 4vw, 44px);
+    line-height:1.02;
+    color: #dfffe0;
+    letter-spacing:-0.6px;
+    transform:translateY(0);
+    opacity:1;
+  }
+  p.lead{
+    margin:0 0 22px 0;
+    color:var(--muted);
+    font-size:16px;
+    max-width:60ch;
+  }
+  .cta-row{display:flex;gap:12px;align-items:center}
+  .btn{
+    display:inline-grid;place-items:center;
+    padding:12px 18px;border-radius:999px;
+    font-weight:700;border:0;cursor:pointer;
+    background:linear-gradient(90deg,var(--accent), #16a84a);
+    color:#021309; box-shadow: 0 8px 28px rgba(29,185,84,0.14);
+    transition:transform .2s, box-shadow .2s, opacity .18s;
+    text-decoration:none;font-size:15px;
+  }
+  .btn.secondary{
+    background:transparent;color:var(--muted);
+    border:1px solid rgba(255,255,255,0.04);
+    box-shadow:none;font-weight:600;
+  }
+  .btn:hover{transform:translateY(-4px)}
+
+  /* Right card (preview) */
+  .card{
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border-radius:14px;padding:18px;backdrop-filter: blur(6px);
+    box-shadow: 0 14px 40px rgba(2,8,10,0.6);
+  }
+  .mock{
+    height:320px;border-radius:10px;position:relative; overflow:hidden;
+    background:
+      radial-gradient(600px 200px at -20% 20%, rgba(29,185,84,0.06), transparent 10%),
+      linear-gradient(180deg,#071217,#081218 40%);
+    display:flex;align-items:center;justify-content:center;color:var(--muted);
+    font-weight:600;font-size:13px;border:1px solid rgba(255,255,255,0.02);
+  }
+
+  /* Sections */
+  section.content{margin-top:26px; display:grid; gap:18px;}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  @media (max-width:980px){ .grid3{grid-template-columns:1fr} }
+
+  .panel{
+    background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));
+    padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.02);
+    min-height:120px;
+  }
+  .panel h3{margin:0 0 10px 0;color:#e6fff0}
+  .muted{color:var(--muted);font-size:14px;line-height:1.5}
+
+  /* footer */
+  footer{
+    margin-top:32px;padding:28px;border-radius:12px;
+    display:flex;justify-content:space-between;align-items:center;
+    gap:12px;background:transparent;color:var(--muted);
+  }
+  footer small{opacity:0.8}
+
+  /* subtle animations */
+  .fade-up{ transform:translateY(10px); opacity:0; transition:all .7s cubic-bezier(.2,.9,.2,1); }
+  .fade-up.show{ transform:none; opacity:1; }
+
+  /* contact form */
+  form{ display:grid; gap:10px;}
+  input,textarea{
+    background:var(--glass); border:1px solid rgba(255,255,255,0.03); color: #e8f7ef;
+    padding:10px 12px;border-radius:10px; font-size:14px; resize:none;
+  }
+  input::placeholder, textarea::placeholder{ color: rgba(230,255,240,0.32) }
+
+  /* small helper */
+  .tag{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.02);font-weight:700;color:var(--accent);font-size:12px;}
+  .who{display:flex;gap:12px;align-items:center}
+  .avatar{width:48px;height:48px;border-radius:10px;background:linear-gradient(180deg,#071b14,#052216);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent)}
+</style>
 </head>
 <body>
+  <div class="site">
     <header>
-        <img src="https://via.placeholder.com/150?text=NodeSpark+Logo" alt="NodeSpark Logo" class="logo">
-        <nav>
-            <a href="#home">Inicio</a>
-            <a href="#services">Servicios</a>
-            <a href="#contact">Contacto</a>
-        </nav>
+      <div class="brand">
+        <!-- SVG logo: verde, estilo "nodo + chispa" -->
+        <div class="logo-wrap" aria-hidden="true">
+          <svg width="44" height="44" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Logo NodeSpark">
+            <defs>
+              <linearGradient id="g1" x1="0" x2="1">
+                <stop offset="0" stop-color="#23e07a"/>
+                <stop offset="1" stop-color="#00c06b"/>
+              </linearGradient>
+              <filter id="f1" x="-50%" y="-50%" width="200%" height="200%">
+                <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0a3b1f" flood-opacity="0.45"/>
+              </filter>
+            </defs>
+
+            <!-- conexiones -->
+            <g filter="url(#f1)">
+              <circle cx="32" cy="32" r="12" fill="url(#g1)"/>
+              <path d="M32 12 L40 16" stroke="white" stroke-opacity="0.06" stroke-width="2" stroke-linecap="round"/>
+              <path d="M44 24 L52 22" stroke="white" stroke-opacity="0.04" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="44" cy="22" r="3" fill="#16b655"/>
+            </g>
+
+            <!-- stylized N -->
+            <path d="M25 42 L28 22 L38 38 L41 22" fill="none" stroke="#02170b" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M25 42 L28 22 L38 38 L41 22" stroke="white" stroke-opacity="0.06" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div>
+          <h1>NodeSpark Corp.</h1>
+          <div style="font-size:12px;color:var(--muted);margin-top:2px">Innovación — Nodos — Impacto</div>
+        </div>
+      </div>
+
+      <nav>
+        <a href="#about">Nosotros</a>
+        <a href="#services">Servicios</a>
+        <a href="#team">Equipo</a>
+        <a href="#contact">Contacto</a>
+      </nav>
     </header>
 
-    <section id="home" class="section">
-        <h1>Bienvenido a NodeSpark</h1>
-        <p>Somos una empresa innovadora especializada en tecnología de punta. Desde Blockchain hasta Inteligencia Artificial, ofrecemos soluciones personalizadas para tu negocio.</p>
-    </section>
+    <!-- HERO with canvas particles on the right -->
+    <main class="hero">
+      <div class="hero-left">
+        <span class="kicker fade-up">Startup · Tecnología · Confiable</span>
+        <h2 class="fade-up" style="transition-delay:0.06s">Encendemos nodos. Conectamos futuro.</h2>
+        <p class="lead fade-up" style="transition-delay:0.12s">NodeSpark Corp. diseña infraestructuras distribuidas, soluciones en blockchain y modelos de IA integrados que impulsan productos escalables y seguros. Aceleramos tu producto desde prototipo hasta producción.</p>
 
-    <section id="services" class="section">
-        <h2>Nuestros Servicios</h2>
-        <div>
-            <h3>Tecnología Blockchain</h3>
-            <p>Desarrollamos soluciones seguras y escalables basadas en Blockchain para optimizar tus procesos.</p>
+        <div class="cta-row fade-up" style="transition-delay:0.18s">
+          <a class="btn" href="#contact">Solicitar demo</a>
+          <a class="btn secondary" href="#services">Ver servicios</a>
         </div>
-        <div>
-            <h3>Desarrollo de IA</h3>
-            <p>Creamos sistemas de Inteligencia Artificial avanzados para automatizar y mejorar tus operaciones.</p>
-        </div>
-        <div>
-            <h3>Desarrollo de Páginas Web</h3>
-            <p>Diseñamos y desarrollamos sitios web modernos y funcionales adaptados a tus necesidades.</p>
-        </div>
-        <div>
-            <h3>Contratos Inteligentes</h3>
-            <p>Creación y despliegue de contratos en redes como BNB, ETH y más, con total seguridad y eficiencia.</p>
-        </div>
-    </section>
+      </div>
 
-    <footer id="contact">
-        <p>© 2025 NodeSpark. Todos los derechos reservados.</p>
-        <p>Contáctanos: info@nodespark.com</p>
-    </footer>
+      <div class="hero-right card" aria-hidden="true">
+        <!-- Canvas for particle nodes -->
+        <div id="particle-mock" class="mock">
+          <canvas id="particles" style="position:absolute;inset:0;width:100%;height:100%;"></canvas>
+          <div style="position:relative;z-index:2;text-align:center;padding:14px;">
+            <div style="font-size:13px;margin-bottom:8px;color:var(--muted)">Dashboard preview</div>
+            <div style="font-weight:700;font-size:13px;color:#dfffe0">Dashboard · Nodos activos: <span id="activeCount">3</span></div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- content sections -->
+    <section class="content">
+      <div class="grid3">
+        <div class="panel fade-up">
+          <h3>Blockchain & Infraestructura</h3>
+          <p class="muted">Diseñamos redes privadas y públicas, smart contracts auditables y arquitecturas escalables para proyectos empresariales y startups.</p>
+        </div>
+        <div class="panel fade-up" style="transition-delay:.04s">
+          <h3>Inteligencia Artificial</h3>
+          <p class="muted">Modelos personalizados, integración de APIs y pipelines de datos para darle inteligencia a tu producto.</p>
+        </div>
+        <div class="panel fade-up" style="transition-delay:.08s">
+          <h3>Sistemas a gran escala</h3>
+          <p class="muted">Desarrollo de sistemas resilientes, microservicios y observabilidad para mantener tu negocio funcionando 24/7.</p>
+        </div>
+      </div>
+
+      <div class="panel fade-up" id="about" style="margin-top:6px">
+        <h3>Sobre NodeSpark</h3>
+        <p class="muted">Somos un equipo interdisciplinario con experiencia en criptografía, redes distribuidas y soluciones en la nube. Nos enfocamos en entregar software confiable, seguro y optimizado para producción.</p>
+      </div>
+
+      <div class="grid3" id="services" style="margin-top:6px">
+        <div class="panel fade-up">
+          <h3>Auditoría de Smart Contracts</h3>
+          <p class="muted">Revisiones automáticas y manuales para minimizar riesgos y vulnerabilidades.</p>
+        </div>
+        <div class="panel fade-up" style="transition-delay:.04s">
+          <h3>Despliegue de nodos</h3>
+          <p class="muted">Automatización y orquestación (Docker/Kubernetes) para nodos confiables y monitoreados.</p>
+        </div>
+        <div class="panel fade-up" style="transition-delay:.08s">
+          <h3>Integración de modelos IA</h3>
+          <p class="muted">APIs de inferencia, pipelines ETL y despliegue en infra de baja latencia.</p>
+        </div>
+      </div>
+
+      <div class="panel fade-up" id="team" style="display:flex;align-items:center;gap:18px">
+        <div class="who">
+          <div class="avatar">NS</div>
+          <div>
+            <div style="font-weight:700">NodeSpark Team</div>
+            <div class="muted" style="margin-top:6px">Equipo híbrido — ingenieros de backend, especialistas en datos y seguridad</div>
+          </div>
+        </div>
+        <div style="margin-left:auto" class="muted">¿Quieres trabajar con nosotros? <strong style="color:var(--accent)">hall@nodespark.corp</strong></div>
+      </div>
+
+      <div class="panel fade-up" id="contact">
+        <h3>Contacto</h3>
+        <p class="muted">Cuéntanos tu proyecto y te responderemos en 24-48 horas hábiles.</p>
+        <form onsubmit="event.preventDefault(); alert('¡Gracias! Tu mensaje fue enviado (demo).');">
+          <input type="text" name="name" placeholder="Nombre / Empresa" required>
+          <input type="email" name="email" placeholder="Correo electrónico" required>
+          <textarea name="message" rows="4" placeholder="Describe brevemente tu proyecto..." required></textarea>
+          <div style="display:flex;gap:10px;margin-top:8px">
+            <button class="btn" type="submit">Enviar mensaje</button>
+            <a class="btn secondary" href="mailto:hall@nodespark.corp">Enviar email</a>
+          </div>
+        </form>
+      </div>
+
+      <footer>
+        <small>&copy; <span id="year"></span> NodeSpark Corp. · Todos los derechos reservados</small>
+        <div style="display:flex;gap:10px;align-items:center">
+          <span class="tag">Seguridad</span>
+          <span class="tag">Escalabilidad</span>
+        </div>
+      </footer>
+    </section>
+  </div>
+
+<script>
+  // set year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // reveal animations for fade-up elements
+  function reveal() {
+    document.querySelectorAll('.fade-up').forEach((el, i) => {
+      setTimeout(()=> el.classList.add('show'), 120 + i*80);
+    });
+  }
+  reveal();
+
+  /* PARTICLE NODES CANVAS
+     Lightweight particle system that creates nodes and draws connecting lines
+     — auto-resizes and simulates a few active nodes
+  */
+  (function(){
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    let W = canvas.width = canvas.offsetWidth;
+    let H = canvas.height = canvas.offsetHeight;
+
+    // handle resizing
+    function resize(){
+      W = canvas.width = canvas.offsetWidth;
+      H = canvas.height = canvas.offsetHeight;
+    }
+    window.addEventListener('resize', resize);
+
+    // nodes: position, vx, vy, radius, pulse
+    const nodes = [];
+    const N = 8; // how many base nodes
+    for(let i=0;i<N;i++){
+      nodes.push({
+        x: Math.random()*W,
+        y: Math.random()*H,
+        vx: (Math.random()-0.5)*0.6,
+        vy: (Math.random()-0.5)*0.6,
+        r: 2 + Math.random()*3,
+        phase: Math.random()*Math.PI*2
+      });
+    }
+
+    // add occasional spark nodes (appearing briefly)
+    function spawnSpark(){
+      nodes.push({
+        x: Math.random()*W,
+        y: Math.random()*H,
+        vx: (Math.random()-0.5)*2,
+        vy: (Math.random()-0.5)*2,
+        r: 1.4 + Math.random()*2.2,
+        life: 80 + Math.random()*80,
+        phase: Math.random()*Math.PI*2
+      });
+      // limit total
+      if(nodes.length>28) nodes.splice(8, nodes.length-28);
+    }
+
+    // update loop
+    function update(){
+      ctx.clearRect(0,0,W,H);
+
+      // subtle background glow
+      const g = ctx.createRadialGradient(W*0.1,H*0.2,0,W*0.5,H*0.5,Math.max(W,H)*0.9);
+      g.addColorStop(0,'rgba(29,185,84,0.02)');
+      g.addColorStop(1,'rgba(8,16,12,0)');
+      ctx.fillStyle = g;
+      ctx.fillRect(0,0,W,H);
+
+      // update nodes
+      for(let i=0;i<nodes.length;i++){
+        const p = nodes[i];
+        // move
+        p.x += (p.vx || 0);
+        p.y += (p.vy || 0);
+        // bounce
+        if(p.x < 6 || p.x > W-6) p.vx *= -1;
+        if(p.y < 6 || p.y > H-6) p.vy *= -1;
+
+        // life
+        if(p.life != null){
+          p.life--;
+          if(p.life<0){ nodes.splice(i,1); i--; continue; }
+        }
+
+        // pulse radius
+        p.phase += 0.05;
+        const rr = p.r + Math.sin(p.phase)*0.6;
+
+        // draw glow
+        ctx.beginPath();
+        const grd = ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,rr*10);
+        grd.addColorStop(0, 'rgba(29,185,84,0.22)');
+        grd.addColorStop(0.2, 'rgba(29,185,84,0.10)');
+        grd.addColorStop(1, 'rgba(10,20,15,0)');
+        ctx.fillStyle = grd;
+        ctx.arc(p.x,p.y, rr*6, 0, Math.PI*2);
+        ctx.fill();
+
+        // draw core
+        ctx.beginPath();
+        ctx.fillStyle = 'rgba(29,185,84,0.98)';
+        ctx.arc(p.x, p.y, rr, 0, Math.PI*2);
+        ctx.fill();
+      }
+
+      // draw connections between close nodes
+      for(let i=0;i<nodes.length;i++){
+        for(let j=i+1;j<nodes.length;j++){
+          const a = nodes[i], b = nodes[j];
+          const dx = a.x - b.x, dy = a.y - b.y;
+          const d = Math.sqrt(dx*dx + dy*dy);
+          if(d < 120){
+            ctx.beginPath();
+            const alpha = 0.28*(1 - d/120);
+            ctx.strokeStyle = 'rgba(29,185,84,'+ (alpha*0.8) +')';
+            ctx.lineWidth = 1;
+            ctx.moveTo(a.x,a.y);
+            ctx.lineTo(b.x,b.y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      requestAnimationFrame(update);
+    }
+
+    // spawn sparks periodically
+    setInterval(spawnSpark, 1200 + Math.random()*2600);
+    // sync initial positions to visible center
+    function seedToCenter(){ nodes.forEach(n => { n.x = W*0.3 + (Math.random()-0.5)*W*0.4; n.y = H*0.35 + (Math.random()-0.5)*H*0.4; }); }
+    seedToCenter();
+
+    update();
+
+    // active nodes counter demo
+    const activeEl = document.getElementById('activeCount');
+    setInterval(()=> {
+      activeEl.textContent = Math.max(1, Math.floor(3 + Math.random()*6));
+    }, 2700);
+  })();
+</script>
 </body>
-  </html>
+</html>
+
